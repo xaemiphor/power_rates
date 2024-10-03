@@ -42,8 +42,8 @@ processTimestamp() {
 	EXCEL_TIME=",${EXCEL_TIME},"
 	for RATE in ${RATES[@]}; do
 		EXISTING=$(cat "${DATA_DIR}/${RATE}.export/${YEAR}/${MONTH}/${DAY}/${HOUR}" 2>/dev/null || true)
-		if [[ -z "${EXISTING}" || "${EXISTING}" == "error" || "${EXISTING}" =~ ^0[0-9]\. || "${EXISTING}" =~ ^[0-9] ]]; then
-			VALUES=( $(awk -F ',' -v kind=${RATE} -v edate=${EXCEL_DATE} -v etime=${EXCEL_TIME} '$2~kind && $3~edate && $0~etime{print $10}' "${SOURCE}") )
+		if [[ -z "${EXISTING}" || "${EXISTING}" == "error" || "${EXISTING}" =~ ^0[0-9]\. ]]; then
+			VALUES=( $(mawk -F ',' -v kind=${RATE} -v edate=${EXCEL_DATE} -v etime=${EXCEL_TIME} '$2~kind && $3~edate && $0~etime{print $10}' "${SOURCE}") )
 			PRICE=0
 			for val in ${VALUES[@]}; do
 				PRICE=$(echo "${PRICE} + ${val}" | bc | sed 's/\.0*$//;s/\.\([0-9]*[1-9]\)0*$/.\1/')
