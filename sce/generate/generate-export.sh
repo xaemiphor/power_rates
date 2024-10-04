@@ -10,7 +10,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 DATA_DIR=$(dirname "${SCRIPT_DIR}")
 YEAR=$(date -u +%Y)
 START_TIME=$(date -u -d"${YEAR}-01-01 00:00:00" +%s)
-END_TIME=$(date -u -d"$(( ${YEAR} + 1 ))-01-01 00:00:00" +%s)
+END_TIME=$(date -u -d"$(( ${YEAR} + 2 ))-01-01 00:00:00" +%s)
 
 if [[ -z "${SOURCE}" || ! -e "${SOURCE}" ]]; then
 	echo "ERROR: ${SOURCE} doesn't exist or was undefined"
